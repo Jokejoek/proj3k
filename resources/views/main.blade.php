@@ -26,50 +26,84 @@
                 <a href="#">Vulnerability</a>
                 <a href="#">Community</a>
                 <a href="#">About</a>
-                <a href="#" class="btn btn-success btn-sm">Login</a>
+                <!--<a href="#" class="btn-auth">Login</a>-->
+                <a href="#" class="fontLog"fontLog>Login</a>
+                <a href="#" class="btn-auth">Sign up</a>
             </div>
         </div>
     </nav>
 
+    
     <div class="container py-4">
 
         <!-- News -->
         <div class="mb-4">
-            <h4 class="section-title">News</h4>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card card-news">
-                        <img src="https://picsum.photos/400/200" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <p class="card-text">ข่าวสารด้าน Cyber Security อัปเดตล่าสุด...</p>
-                        </div>
-                    </div>
+        <h4 class="section-title text-white">News</h4>
+        <div class="row">
+            {{-- News 1 --}}
+            <div class="col-md-4 mb-3">
+            <article class="news-card">
+                <div class="news-thumb">
+                <img src="https://picsum.photos/seed/ios/640/360" alt="apple zero-day">
                 </div>
-                <div class="col-md-4">
-                    <div class="card card-news">
-                        <img src="https://picsum.photos/401/200" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <p class="card-text">ประกาศ CVE ใหม่ล่าสุดจาก NVD...</p>
-                        </div>
-                    </div>
+                <div class="news-body">
+                <div class="news-meta">
+                    <span><i class="fa-regular fa-clock"></i> สิงหาคม 22, 2025</span>
+                    <span class="news-cat">IT</span>
                 </div>
-                <div class="col-md-4">
-                    <div class="card card-news">
-                        <img src="https://picsum.photos/402/200" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <p class="card-text">การโจมตี Ransomware กำลังกลับมา...</p>
-                        </div>
-                    </div>
+                <h6 class="news-title">Apple ออกแพตช์แก้ไขช่องโหว่ Zero‑Day CVE‑2025‑43300 ใน iOS, iPadOS และ macOS</h6>
+                <p class="news-excerpt">Apple ได้ปล่อยอัปเดตความปลอดภัยเพื่ออุดช่องโหว่สำคัญที่อาจถูกโจมตีแบบ active อยู่แล้ว […]</p>
+                <a href="#" class="news-more">อ่านต่อ</a>
                 </div>
+            </article>
             </div>
-            <a href="#" class="btn-more mt-2 d-inline-block">More…</a>
+
+            {{-- News 2 --}}
+            <div class="col-md-4 mb-3">
+            <article class="news-card">
+                <div class="news-thumb">
+                <img src="https://picsum.photos/seed/dom/640/360" alt="dom clickjacking">
+                </div>
+                <div class="news-body">
+                <div class="news-meta">
+                    <span><i class="fa-regular fa-clock"></i> สิงหาคม 22, 2025</span>
+                    <span class="news-cat">Security</span>
+                </div>
+                <h6 class="news-title">ผู้เชี่ยวชาญพบช่องโหว่ “DOM‑Based Extension Clickjacking” เสี่ยงขโมยรหัสผ่านจากตัวจัดการรหัสยอดนิยม</h6>
+                <p class="news-excerpt">นักวิจัยเผยวิธีโจมตีรูปแบบใหม่ที่อาศัย DOM manipulation เพื่อหลอกผู้ใช้ให้คลิกยืนยันโดยไม่ตั้งใจ […]</p>
+                <a href="#" class="news-more">อ่านต่อ</a>
+                </div>
+            </article>
+            </div>
+
+            {{-- News 3 --}}
+            <div class="col-md-4 mb-3">
+            <article class="news-card">
+                <div class="news-thumb">
+                <img src="https://picsum.photos/seed/cisa/640/360" alt="cisa kev">
+                </div>
+                <div class="news-body">
+                <div class="news-meta">
+                    <span><i class="fa-regular fa-clock"></i> สิงหาคม 21, 2025</span>
+                    <span class="news-cat">Advisory</span>
+                </div>
+                <h6 class="news-title">CISA เพิ่มช่องโหว่ Trend Micro Apex One ลงใน Known Exploited Vulnerabilities Catalog</h6>
+                <p class="news-excerpt">หน่วยงานภาครัฐสหรัฐแนะนำให้องค์กรเร่งแพตช์เพื่อลดความเสี่ยงจากการถูกโจมตีที่พบการเอ็กซ์พลอยต์จริงแล้ว […]</p>
+                <a href="#" class="news-more">อ่านต่อ</a>
+                </div>
+            </article>
+            </div>
+        </div>
+        <!-- More but -->
+            <div class="text-center mt-3">
+                <a href="#" class="btn-more">More…</a>
+            </div>
         </div>
 
         <!-- Popular Tools -->
         <div class="panel mb-4">
             <div class="d-flex justify-content-between">
                 <h5 class="section-title">Popular Tools</h5>
-                <a href="#" class="btn-more">More…</a>
             </div>
             <canvas id="toolsChart" height="120"></canvas>
         </div>
@@ -99,7 +133,6 @@
             </div>
         </div>
 
-        <!-- Community Post -->
         <!-- Community Post -->
         <div>
         <h5 class="section-title">Community Post</h5>
