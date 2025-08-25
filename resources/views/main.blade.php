@@ -8,21 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <style>
-        body { background: #0b1220; color: #fff; }
-        .navbar { background: #111827; }
-        .navbar a { color: #fff !important; margin-right: 15px; }
-        .btn-more { background: #7CFC00; color: #111; padding: 3px 12px; border-radius: 5px; font-weight: bold; }
-        .section-title { font-weight: bold; margin-bottom: 10px; }
-        .card-news img { height: 180px; object-fit: cover; }
-        .card-news { background: #1f2937; border: none; color: #fff; }
-        .panel { background: #1f2937; border-radius: 10px; padding: 15px; }
-        .table-darkish tbody tr:nth-child(odd){background: #1f2937;}
-        .table-darkish tbody tr:nth-child(even){background: #111827;}
-        .community-card { background: #1f2937; border-radius: 10px; padding: 15px; }
-        .footer { background: #111827; padding: 20px; text-align: center; margin-top: 30px; }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 <body>
 
