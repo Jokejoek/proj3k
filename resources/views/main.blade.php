@@ -100,42 +100,121 @@
         </div>
 
         <!-- Community Post -->
+        <!-- Community Post -->
         <div>
-            <h5 class="section-title">Community Post</h5>
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <div class="community-card">
-                        <strong>I need to jack off</strong>
-                        <div class="d-flex justify-content-between text-muted small mt-2">
-                            <span><i class="fa-regular fa-comment"></i> 8</span>
-                            <span><i class="fa-regular fa-heart"></i> 16</span>
-                            <span><i class="fa-regular fa-bookmark"></i></span>
-                        </div>
-                    </div>
+        <h5 class="section-title">Community Post</h5>
+        <div class="row">
+            {{-- Card 1 --}}
+            <div class="col-md-4 mb-3">
+            <div class="community-card">
+                <div class="community-title">I need to jerk off</div>
+                <div class="author-row">
+                <img class="author-avatar" src="{{ asset('images/users/jokec.jpg') }}"
+                    onerror="this.src='https://i.pravatar.cc/64?u=jokec'">
+                <div>
+                    <div class="author-name">Jokec</div>
+                    <div class="author-meta">1d</div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="community-card">
-                        <strong>why my c0de work/never</strong>
-                        <div class="d-flex justify-content-between text-muted small mt-2">
-                            <span><i class="fa-regular fa-comment"></i> 3</span>
-                            <span><i class="fa-regular fa-heart"></i> 9</span>
-                            <span><i class="fa-regular fa-bookmark"></i></span>
-                        </div>
-                    </div>
+                <div class="post-actions">
+                    <i class="fa-regular fa-comment"></i><span>8</span>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="community-card">
-                        <strong>what is CVE</strong>
-                        <div class="d-flex justify-content-between text-muted small mt-2">
-                            <span><i class="fa-regular fa-comment"></i> 5</span>
-                            <span><i class="fa-regular fa-heart"></i> 12</span>
-                            <span><i class="fa-regular fa-bookmark"></i></span>
-                        </div>
-                    </div>
                 </div>
-                <!-- เพิ่มการ์ดอื่นได้ตามรูป -->
             </div>
+            </div>
+
+            {{-- Card 2 --}}
+            <div class="col-md-4 mb-3">
+            <div class="community-card">
+                <div class="community-title">why i run code and it error</div>
+                <div class="author-row">
+                <img class="author-avatar" src="{{ asset('images/users/dabbydoo.jpg') }}"
+                    onerror="this.src='https://i.pravatar.cc/64?u=dabbydoo'">
+                <div>
+                    <div class="author-name">DabbyDoo</div>
+                    <div class="author-meta">21h</div>
+                </div>
+                <div class="post-actions">
+                    <i class="fa-regular fa-comment"></i><span>5</span>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            {{-- Card 3 --}}
+            <div class="col-md-4 mb-3">
+            <div class="community-card">
+                <div class="community-title">what is CVE</div>
+                <div class="author-row">
+                <img class="author-avatar" src="{{ asset('images/users/pakin.jpg') }}"
+                    onerror="this.src='https://i.pravatar.cc/64?u=pakin'">
+                <div>
+                    <div class="author-name">Pakin</div>
+                    <div class="author-meta">60d</div>
+                </div>
+                <div class="post-actions">
+                    <i class="fa-regular fa-comment"></i><span>9</span>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            {{-- Card 4 --}}
+            <div class="col-md-4 mb-3">
+            <div class="community-card">
+                <div class="community-title">why im so smart</div>
+                <div class="author-row">
+                <img class="author-avatar" src="{{ asset('images/users/domon.jpg') }}"
+                    onerror="this.src='https://i.pravatar.cc/64?u=domon'">
+                <div>
+                    <div class="author-name">Domon</div>
+                    <div class="author-meta">4d</div>
+                </div>
+                <div class="post-actions">
+                    <i class="fa-regular fa-comment"></i><span>4</span>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            {{-- Card 5 --}}
+            <div class="col-md-4 mb-3">
+            <div class="community-card">
+                <div class="community-title">Jokec pen gay</div>
+                <div class="author-row">
+                <img class="author-avatar" src="{{ asset('images/users/domon.jpg') }}"
+                    onerror="this.src='https://i.pravatar.cc/64?u=domon2'">
+                <div>
+                    <div class="author-name">doMon</div>
+                    <div class="author-meta">5h</div>
+                </div>
+                <div class="post-actions">
+                    <i class="fa-regular fa-comment"></i><span>3</span>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            {{-- Card 6 --}}
+            <div class="col-md-4 mb-3">
+            <div class="community-card">
+                <div class="community-title">i have 100,000 salay</div>
+                <div class="author-row">
+                <img class="author-avatar" src="{{ asset('images/users/domon.jpg') }}"
+                    onerror="this.src='https://i.pravatar.cc/64?u=domon3'">
+                <div>
+                    <div class="author-name">dOmOn</div>
+                    <div class="author-meta">60d</div>
+                </div>
+                <div class="post-actions">
+                    <i class="fa-regular fa-comment"></i><span>1</span>
+                </div>
+                </div>
+            </div>
+            </div>
+
         </div>
+        </div>
+
 
     </div>
 
