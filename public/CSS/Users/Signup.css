@@ -1,0 +1,154 @@
+/* ================== Global ================== */
+html, body {
+    height: 100%;
+}
+body { 
+    background: #0b1220; 
+    color: #fff; 
+    display: flex;              /* สำหรับ sticky footer */
+    flex-direction: column;     /* เรียงจากบนลงล่าง */
+    margin: 0;
+}
+
+/* ใช้คู่กับ <main> ใน Blade เพื่อดัน footer ลงล่างเสมอ */
+main {
+    flex: 1;
+}
+
+/* ================== Navbar ================== */
+.navbar { 
+    background: #111827; 
+}
+.navbar a { 
+    color: #ffffff;
+    margin-right: 15px; 
+    text-decoration: none;
+}
+.navbar a:hover { 
+    text-decoration: underline;
+}
+
+/* font Login */
+.fontLog { 
+    color: #ffffff; 
+    margin-right: 15px; 
+}
+.fontLog:hover { 
+    color: #8ae000; 
+    text-decoration: underline;
+}
+
+/* ปุ่มทั่วไป (More) */
+.btn-more { 
+    display: inline-block;
+    background: #8ae000; 
+    color: #0b1220;
+    font-weight: 700;
+    font-size: 1rem;       
+    padding: 8px 20px;     
+    border-radius: 8px;
+    text-align: center;
+    transition: all .18s ease;
+}
+.btn-more:hover { 
+    background: #76c900;   
+    color: #ffffff; 
+    text-decoration: none;
+}
+/* avatar */
+.avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,.12);
+}
+.avatar-fallback {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 0.9rem;
+  background: #8ae000; color: #0b1220;
+}
+.username {
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ปุ่ม Auth (Sign up / Login) */
+.btn-auth {
+    background: #8ae000;          
+    color: #0b1220 !important;    
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: none;
+    transition: all .18s ease;
+    margin-left: 1px;             
+}
+.btn-auth:hover { 
+    background: #09be21;   
+    color: #ffffff !important; 
+    text-decoration: none;
+}
+
+/* Section title */
+.section-title { 
+    font-weight: bold; 
+    margin-bottom: 10px; 
+}
+
+/* ===== Signup Card / Form tweaks ===== */
+.card.signup-card {
+    background:#1f2937; 
+    border-radius:14px; 
+    color:#fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,.35);
+}
+.card.signup-card .form-control {
+    background: #0f172a;          /* เข้มให้เข้าธีม */
+    border: 1px solid #2b3446;
+    color: #e5e7eb;
+}
+.card.signup-card .form-control:focus {
+    background: #0b1220;
+    border-color: #8ae000;
+    box-shadow: none;
+    color: #fff;
+}
+
+/* ===== Signup Layout ===== */
+.signup-wrapper {
+    flex: 1;                          /* ดันให้อยู่กลาง */
+    display: flex;
+    align-items: center;              /* จัดกลางแนวตั้ง */
+    justify-content: center;          /* จัดกลางแนวนอน */
+    padding: 40px 0;                  /* กันชนด้านบน-ล่าง */
+}
+
+.card.signup-card {
+    background: #1f2937;
+    border-radius: 14px;
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,.35);
+    width: 100%;
+    max-width: 480px;
+}
+
+.signup-card .form-group {
+    margin-bottom: 15px;   /* เพิ่มระยะห่างให้ทุก input */
+}
+
+.signup-card button.btn-auth {
+    margin-top: 10px;      /* ขยับปุ่มลงมาอีกนิด */
+}
+
+
+/* ================== Footer ================== */
+.footer { 
+    background: #111827; 
+    padding: 20px; 
+    text-align: center; 
+    margin-top: 30px; 
+    /* sticky footer อยู่ล่างเสมอ ด้วย layout flex ของ body + main{flex:1} */
+}

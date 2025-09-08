@@ -1,111 +1,97 @@
-:root{
-  --bg:#0b1220;
-  --nav:#0f1a2b;
-  --card:#2f3240;
-  --text:#ffffff;
-  --muted:#a5adbd;
-  --btn:#9eff00;
-  --btn-h:#8ae000;
-  --radius:12px;
-  --shadow:0 10px 24px rgba(0,0,0,.35);
+:root {
+  --bg: #0b1220;
+  --card: #1f2937;
+  --text: #ffffff;
+  --muted: #9fb2c3;
+  --btn: #8ae000;
+  --btn-h: #09be21;
+  --radius: 14px;
+  --shadow: 0 6px 18px rgba(0,0,0,.35);
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:system-ui,-apple-system,Inter,Segoe UI,Roboto,Arial,sans-serif;
-  line-height:1.4;
+* { box-sizing: border-box }
+html, body { height: 100% }
 
-  display:flex;           /* NEW: ใช้ flex layout */
-  flex-direction:column;  /* NEW: เรียงบนลงล่าง */
-  min-height:100vh;       /* NEW: อย่างน้อยสูงเต็มจอ */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Inter, Segoe UI, Roboto, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-/* Navbar: Logo + ชื่อเท่านั้น */
-.nav{
-  background:var(--nav);
-  padding:14px 28px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  box-shadow:0 2px 0 rgba(0,0,0,.15) inset;
-}
-.nav__logo{
-  height:42px;width:42px;object-fit:contain;border-radius:8px;background:#111;display:block;
-}
-.nav__brand{
-  margin:0;font-size:18px;font-weight:700;letter-spacing:.2px;color:#fff;
-}
-.nav__brand-link{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  text-decoration:none;
-}
-.nav__brand-link:hover .nav__brand{
-  color: var(--btn); /* hover แล้วเปลี่ยนสีเขียว */
-}
 /* Layout */
-.wrap{
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:0;
-  transform: translateY(5px); /* เลื่อนลง 30px */
+.wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
 }
 
 /* Card */
-.card{
-  width:min(520px,92vw);
-  background:var(--card);
-  border-radius:calc(var(--radius) + 4px);
-  box-shadow:var(--shadow);
-  padding:28px;
+.card {
+  width: min(420px, 92vw);
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px;
 }
-.card__title{
-  text-align:center;
-  font-size:28px;
-  font-weight:800;
-  margin:4px 0 18px 0;
+.card__title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
 }
 
 /* Form */
-.field{margin:12px 0}
-.input{
-  width:100%;
-  background:#fff;
-  color:#111;
-  padding:14px 14px;
-  border:none;border-radius:10px;outline:none;
-  font-size:15px;
-  box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);
+.field { margin: 14px 0 }
+.input {
+  width: 100%;
+  background: #0f172a;
+  color: #e5e7eb;
+  padding: 12px 14px;
+  border: 1px solid #2b3446;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
 }
-.input::placeholder{color:#7c8597}
-
-.btn{
-  width:100%;
-  margin-top:14px;
-  padding:14px 16px;
-  border:none;border-radius:10px;
-  background:var(--btn);
-  font-weight:700;color:#111;cursor:pointer;
-  transition:transform .02s ease, background .15s ease;
+.input:focus {
+  background: #0b1220;
+  border-color: var(--btn);
+  color: #fff;
 }
-.btn:hover{background:var(--btn-h)}
-.btn:active{transform:translateY(1px)}
+.input::placeholder { color: #7c8597 }
 
-.err{margin-top:8px;font-size:13px;color:#ffb4b4}
+.btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--btn);
+  font-weight: 700;
+  color: #0b1220;
+  cursor: pointer;
+  transition: transform .02s ease, background .15s ease;
+}
+.btn:hover { background: var(--btn-h); color: #fff; }
+.btn:active { transform: translateY(1px) }
+
+.err {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #ffb4b4;
+}
 
 /* Footer */
-.footer{
-  background:var(--nav);
-  color:var(--muted);
-  text-align:center;
-  padding:18px 28px;
-  margin-top:auto; /* ดันให้ไปชิดล่าง */
-  font-size:14px;
+.footer {
+  background: #111827;
+  color: var(--muted);
+  text-align: center;
+  padding: 18px 28px;
+  margin-top: auto;
+  font-size: 14px;
 }

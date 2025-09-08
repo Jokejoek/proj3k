@@ -1,0 +1,265 @@
+/* ================== Theme tokens ================== */
+:root {
+    --bg: #0b1220;
+    --surface: #111827;
+    --muted: #1f2937;
+    --text: #e5e7eb;
+    --text-weak: #cbd5e1;
+    --border: #2b3446;
+    --accent: #8ae000;
+
+    --sev-critical-bg: #7f1d1d;
+    --sev-critical-bd: #991b1b;
+    --sev-critical-fg: #fecaca;
+    --sev-high-bg: #7c2d12;
+    --sev-high-bd: #9a3412;
+    --sev-high-fg: #ffedd5;
+    --sev-medium-bg: #78350f;
+    --sev-medium-bd: #a16207;
+    --sev-medium-fg: #fef9c3;
+    --sev-low-bg: #064e3b;
+    --sev-low-bd: #065f46;
+    --sev-low-fg: #d1fae5;
+}
+
+/* ================== Global ================== */
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+a {
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
+/* ================== Navbar ================== */
+.navbar {
+    background: var(--surface);
+    padding: 12px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+.navbar a {
+    color: #f3f4f6;
+    margin-right: 18px;
+    font-weight: 500;
+}
+.navbar a:hover {
+    color: var(--accent);
+}
+
+/* avatar */
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+}
+.avatar-fallback {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    background: var(--accent);
+    color: var(--bg);
+}
+.username {
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* dropdown */
+.dropdown-menu {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+}
+.dropdown-menu .dropdown-item {
+    color: #f3f4f6;
+}
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+    background-color: #1f2937;
+    color: var(--accent);
+}
+.dropdown-divider {
+    border-top: 1px solid var(--border);
+}
+
+/* Login link + Auth button */
+.fontLog {
+    color: #f9fafb;
+    margin-right: 15px;
+    font-weight: 500;
+}
+.fontLog:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+.btn-auth {
+    background: linear-gradient(135deg, var(--accent), #66c100);
+    color: #0b1220 !important;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 10px;
+    border: none;
+    transition: all 0.25s ease;
+}
+.btn-auth:hover {
+    background: linear-gradient(135deg, #76c900, #4fb000);
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* ================== Section title ================== */
+.section-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    border-left: 5px solid var(--accent);
+    padding-left: 10px;
+    color: #f9fafb;
+}
+
+/* ================== CVE list ================== */
+#cve .cve-card {
+    position: relative; /* เพื่อให้ stretched-link คลุมทั้งใบ */
+    cursor: pointer;
+    background: var(--surface);
+    color: #f3f4f6;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease,
+        border-color 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+#cve .cve-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+    border-color: #374151;
+}
+/* โฟกัสด้วยคีย์บอร์ด */
+#cve .cve-card:focus-within {
+    box-shadow: 0 0 0 3px rgba(138, 224, 0, 0.25),
+        0 6px 18px rgba(0, 0, 0, 0.55);
+}
+#cve .cve-card .card-img-top {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* คงสัดส่วนภาพที่หัวการ์ด */
+    object-fit: cover;
+    max-height: 220px; /* fallback */
+    border-bottom: 1px solid var(--border);
+}
+#cve .cve-card .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+#cve .cve-card .btn {
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+/* ====== Badges / Chips ====== */
+.badge-sev {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.2px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+}
+.sev-critical {
+    background: var(--sev-critical-bg);
+    border-color: var(--sev-critical-bd);
+    color: var(--sev-critical-fg);
+}
+.sev-high {
+    background: var(--sev-high-bg);
+    border-color: var(--sev-high-bd);
+    color: var(--sev-high-fg);
+}
+.sev-medium {
+    background: var(--sev-medium-bg);
+    border-color: var(--sev-medium-bd);
+    color: var(--sev-medium-fg);
+}
+.sev-low {
+    background: var(--sev-low-bg);
+    border-color: var(--sev-low-bd);
+    color: var(--sev-low-fg);
+}
+.sev-none {
+    background: #374151;
+    border-color: #4b5563;
+    color: #e5e7eb;
+}
+
+.cvss-chip {
+    display: inline-block;
+    background: #0f172a;
+    color: #c7d2fe;
+    border: 1px solid #312e81;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    margin-right: 6px;
+}
+.year-chip,
+.prod-chip {
+    display: inline-block;
+    background: var(--muted);
+    color: #f3f4f6;
+    border: 1px solid #374151;
+    font-size: 0.72rem;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-right: 6px;
+    margin-top: 6px;
+}
+
+/* หัวข้อ/คำอธิบาย */
+.cve-id {
+    font-weight: 800;
+    color: #f9fafb;
+    letter-spacing: 0.3px;
+    margin-bottom: 0.25rem;
+}
+.cve-desc {
+    color: #d1d5db;
+    margin-top: 0.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; /* ตัด 3 บรรทัด */
+    overflow: hidden;
+}
+
+/* ลิงก์คลุมทั้งการ์ด (accessibility) */
+.cve-card .stretched-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 6px;
+    border-radius: 12px;
+}
+
+/* ================== Footer ================== */
+.footer {
+    background: var(--surface);
+    padding: 24px;
+    text-align: center;
+    margin-top: 40px;
+    color: #9ca3af;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+

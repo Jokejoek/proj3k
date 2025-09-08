@@ -1,0 +1,70 @@
+:root {
+  --bg-0:#0b1220;
+  --bg-1:#0f1a2b;
+  --bg-2:#171f31;
+  --tx-0:#e2e8f0;
+  --tx-1:#9db0c9;
+  --pri:#38bdf8;
+  --ok:#10b981;
+  --warn:#f59e0b;
+  --danger:#ef4444;
+  --border:#22304a;
+  --chip:#2b3a55;
+  --shadow:0 6px 24px rgba(0,0,0,.25);
+  --radius:16px;
+}
+
+html,body {height:100%;}
+body {
+  background:var(--bg-0);
+  color:var(--tx-0);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Navbar */
+.proj-nav {
+  background:linear-gradient(180deg, #0f1a2b, #0b1220);
+  border-bottom:1px solid var(--border);
+}
+.proj-brand {
+  color:var(--tx-0);
+  text-decoration:none;
+  font-weight:700;
+  letter-spacing:.3px;
+}
+.proj-brand img {height:28px;margin-right:.5rem}
+.nav-link {color:var(--tx-1)!important}
+.nav-link.active, .nav-link:hover {color:var(--tx-0)!important}
+
+/* Wrapper */
+.page-wrap {padding:20px 0}
+.card {
+  background:var(--bg-1);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  color:var(--tx-0);
+}
+.chip {
+  display:inline-block;
+  padding:.25rem .5rem;
+  border-radius:999px;
+  background:var(--chip);
+  color:var(--tx-1);
+  font-size:.8rem;
+}
+
+/* Buttons */
+.btn-outline-danger {
+  --bs-btn-color:var(--danger);
+  --bs-btn-border-color:var(--danger);
+}
+.btn-outline-danger:hover {
+  background:var(--danger);
+  color:white;
+}
+
+/* Utilities */
+.subtitle {color:var(--tx-1); font-size:.9rem}
+.muted {color:var(--tx-1)}
+footer {color:var(--tx-1); border-top:1px solid var(--border)}

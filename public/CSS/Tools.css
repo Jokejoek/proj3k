@@ -1,0 +1,268 @@
+/* ================== Global ================== */
+body {
+    background: #0b1220;
+    color: #e5e7eb;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+a {
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
+/* ================== Navbar ================== */
+.navbar {
+    background: #111827;
+    padding: 12px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+.navbar a {
+    color: #f3f4f6;
+    margin-right: 18px;
+    font-weight: 500;
+}
+.navbar a:hover {
+    color: #8ae000;
+}
+
+/* avatar */
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+}
+.avatar-fallback {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    background: #8ae000;
+    color: #0b1220;
+}
+.username {
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* พื้นหลัง dropdown */
+.dropdown-menu {
+    background-color: #111827; /* สีพื้นหลัง navbar/theme */
+    border: 1px solid #2b3446; /* เส้นขอบบาง ๆ */
+    border-radius: 8px;
+    padding: 0.5rem 0;
+}
+
+/* ข้อความใน dropdown */
+.dropdown-menu .dropdown-item {
+    color: #f3f4f6; /* เทาอ่อน/ขาว */
+}
+
+/* Hover effect */
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+    background-color: #1f2937; /* เข้มขึ้นเล็กน้อย */
+    color: #8ae000; /* เขียวตามธีม ProJ3k */
+}
+
+/* Divider */
+.dropdown-divider {
+    border-top: 1px solid #2b3446;
+}
+
+/* Login link */
+.fontLog {
+    color: #f9fafb;
+    margin-right: 15px;
+    font-weight: 500;
+}
+.fontLog:hover {
+    color: #8ae000;
+    text-decoration: underline;
+}
+
+/* ปุ่ม Auth (Sign up) */
+.btn-auth {
+    background: linear-gradient(135deg, #8ae000, #66c100);
+    color: #0b1220 !important;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 10px;
+    border: none;
+    transition: all 0.25s ease;
+}
+.btn-auth:hover {
+    background: linear-gradient(135deg, #76c900, #4fb000);
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* ================== Section title ================== */
+.section-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    border-left: 5px solid #8ae000;
+    padding-left: 10px;
+    color: #f9fafb;
+}
+
+/* ================== Tools ================== */
+#tools .tool-card {
+    background: #111827;
+    color: #f3f4f6;
+    border: 1px solid #2b3446;
+    border-radius: 14px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+#tools .tool-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+}
+#tools .tool-card img {
+    border-bottom: 1px solid #2b3446;
+    max-height: 180px;
+    object-fit: cover;
+}
+#tools #filterForm {
+    border: 1px dashed #2b3446;
+    background: #1f2937;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+/* ทำให้ card-body ยืด และปุ่มชิดล่าง */
+#tools .tool-card .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+#tools .tool-card .btn {
+    margin-top: auto; /* ดันปุ่มลงล่าง */
+    align-self: flex-start; /* ปุ่มอยู่ชิดซ้าย (ถ้าอยากให้เต็ม card ใช้ align-self: stretch) */
+}
+
+#tools label,
+#tools small {
+    color: #cbd5e1 !important;
+}
+
+/* Badge หมวดหมู่ */
+.badge-cat {
+    display: inline-block;
+    background: #374151;
+    color: #dbeafe;
+    border: 1px solid #4b5563;
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-right: 6px;
+}
+
+/* Badge OS (default) */
+.badge-os {
+    display: inline-block;
+    background: #1f2937;
+    color: #f3f4f6;
+    border: 1px solid #374151;
+    font-size: 0.72rem;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-right: 4px;
+    margin-top: 4px;
+}
+
+/* 🎨 OS-specific colors */
+.badge-os.windows {
+    background: #2563eb;
+    border-color: #1e40af;
+    color: #fff;
+} /* น้ำเงิน */
+.badge-os.linux {
+    background: #ea580c;
+    border-color: #9a3412;
+    color: #fff;
+} /* ส้ม */
+.badge-os.macos {
+    background: #6b7280;
+    border-color: #4b5563;
+    color: #fff;
+} /* เทา */
+.badge-os.android {
+    background: #16a34a;
+    border-color: #166534;
+    color: #fff;
+} /* เขียว */
+
+/* ================== Footer ================== */
+.footer {
+    background: #111827;
+    padding: 24px;
+    text-align: center;
+    margin-top: 40px;
+    color: #9ca3af;
+    border-top: 1px solid #2b3446;
+    font-size: 0.9rem;
+}
+
+/* ================== Tool Detail ================== */
+.tool-detail {
+    max-width: 980px;
+}
+
+.detail-title {
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: #f9fafb;
+    border-left: 6px solid #8ae000;
+    padding-left: 10px;
+}
+
+.detail-tags .chip {
+    display: inline-block;
+    background: #1f2937;
+    color: #e5e7eb;
+    border: 1px solid #374151;
+    font-weight: 600;
+    font-size: 0.78rem;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-right: 8px;
+    margin-bottom: 6px;
+}
+
+.detail-tags .chip--green {
+    background: #8ae000;
+    color: #0b1220;
+    border-color: #76c900;
+}
+
+.detail-hero img {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #2b3446;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.detail-body {
+    color: #f3f4f6;
+    font-size: 1rem;
+}
+.detail-body .lead {
+    color: #cbd5e1;
+    font-size: 1.05rem;
+}
+
+.detail-actions .btn {
+    min-width: 120px;
+}

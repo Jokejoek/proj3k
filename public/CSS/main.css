@@ -1,149 +1,196 @@
 /* ================== Global ================== */
-body { 
-    background: #0b1220; 
-    color: #fff; 
+body {
+    background: #0b1220;
+    color: #fff;
 }
 
 /* ================== Navbar ================== */
-.navbar { 
-    background: #111827; 
+.navbar {
+    background: #111827;
 }
 
-.navbar a { 
-    color: #ffffff ; 
-    margin-right: 15px; 
+.navbar a {
+    color: #ffffff;
+    margin-right: 15px;
 }
 /*font Login*/
-.fontLog { 
-    color: #ffffff ; 
-    margin-right: 15px; 
+.fontLog {
+    color: #ffffff;
+    margin-right: 15px;
 }
-.fontLog:hover { 
-    color: #8ae000 ; 
-    margin-right: 15px; 
+.fontLog:hover {
+    color: #8ae000;
+    margin-right: 15px;
     text-decoration: underline;
 }
 
 /* ปุ่มทั่วไป (More) */
-.btn-more { 
+.btn-more {
     display: inline-block;
-    background: #8ae000; 
+    background: #8ae000;
     color: #0b1220;
     font-weight: 700;
-    font-size: 1rem;       
-    padding: 8px 20px;     
+    font-size: 1rem;
+    padding: 8px 20px;
     border-radius: 8px;
     text-align: center;
-    transition: all .18s ease;
+    transition: all 0.18s ease;
 }
-.btn-more:hover { 
-    background: #76c900;   
-    color: #ffffff; 
+.btn-more:hover {
+    background: #76c900;
+    color: #ffffff;
     text-decoration: none;
+}
+/* avatar */
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+}
+.avatar-fallback {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    background: #8ae000;
+    color: #0b1220;
+}
+.username {
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* พื้นหลัง dropdown */
+.dropdown-menu {
+  background-color: #111827;   /* สีพื้นหลัง navbar/theme */
+  border: 1px solid #2b3446;   /* เส้นขอบบาง ๆ */
+  border-radius: 8px;
+  padding: .5rem 0;
+}
+
+/* ข้อความใน dropdown */
+.dropdown-menu .dropdown-item {
+  color: #f3f4f6;   /* เทาอ่อน/ขาว */
+}
+
+/* Hover effect */
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+  background-color: #1f2937;  /* เข้มขึ้นเล็กน้อย */
+  color: #8ae000;             /* เขียวตามธีม ProJ3k */
+}
+
+/* Divider */
+.dropdown-divider {
+  border-top: 1px solid #2b3446;
 }
 
 /* ปุ่ม Auth (Sign up / Login) */
 .btn-auth {
-    background: #8ae000;          
-    color: #0b1220 !important;    
+    background: #8ae000;
+    color: #0b1220 !important;
     font-weight: 700;
     padding: 6px 14px;
     border-radius: 8px;
     border: none;
-    transition: all .18s ease;
-    margin-left: 1px;             
+    transition: all 0.18s ease;
+    margin-left: 1px;
 }
 
-.btn-auth:hover { 
-    background: #09be21;   
-    color: #ffffff !important; 
+.btn-auth:hover {
+    background: #09be21;
+    color: #ffffff !important;
     text-decoration: none;
 }
 
-
-
 /* Section title */
-.section-title { 
-    font-weight: bold; 
-    margin-bottom: 10px; 
+.section-title {
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 /* ================== News ================== */
 .news-card {
-    background: #1f2937; 
+    background: #1f2937;
     color: #fff;
-    border-radius: 12px; 
-    height: 100%; 
-    display: flex; 
+    border-radius: 12px;
+    height: 100%;
+    display: flex;
     flex-direction: column;
     overflow: hidden;
 }
-.news-thumb img { 
-    width: 100%; 
-    height: 190px; 
-    object-fit: cover; 
-    display: block; 
+.news-thumb img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
 }
-.news-body { 
-    padding: 14px 16px 16px; 
-    display: flex; 
-    flex-direction: column; 
-    flex: 1; 
+.news-body {
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 .news-title {
-    font-size: 1.02rem; 
-    font-weight: 700; 
+    font-size: 1.02rem;
+    font-weight: 700;
     margin: 6px 0 10px;
-    display: -webkit-box; 
-    -webkit-line-clamp: 2; 
-    -webkit-box-orient: vertical; 
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
 }
 .news-meta {
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
-    color: #d1d5db;   
-    font-size: .86rem; 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #d1d5db;
+    font-size: 0.86rem;
     margin-bottom: 6px;
 }
-.news-meta i { 
-    opacity: .9; 
+.news-meta i {
+    opacity: 0.9;
 }
 .news-cat {
-    background: #374151; 
-    color: #dbeafe;   
+    background: #374151;
+    color: #dbeafe;
     border: 1px solid #4b5563;
-    font-weight: 600; 
-    font-size: .72rem; 
-    padding: 2px 8px; 
+    font-weight: 600;
+    font-size: 0.72rem;
+    padding: 2px 8px;
     border-radius: 999px;
 }
 .news-excerpt {
-    color: #e5e7eb;   
-    font-size: .92rem;
-    display: -webkit-box; 
-    -webkit-line-clamp: 2; 
-    -webkit-box-orient: vertical; 
+    color: #e5e7eb;
+    font-size: 0.92rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
 }
-.news-more { 
-    margin-top: 10px; 
-    color: #8ae000;   
-    font-weight: 600; 
-    font-size: .9rem; 
+.news-more {
+    margin-top: 10px;
+    color: #8ae000;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
-.news-more:hover { 
-    color: #76c900; 
-    text-decoration: underline; 
+.news-more:hover {
+    color: #76c900;
+    text-decoration: underline;
 }
-
 
 /* ================== CVE ================== */
-.panel { 
-    background: #1f2937; 
-    border-radius: 10px; 
-    padding: 15px; 
+.panel {
+    background: #1f2937;
+    border-radius: 10px;
+    padding: 15px;
 }
 .table-darkish tbody tr:nth-child(odd) {
     background: #1f2937;
@@ -153,54 +200,54 @@ body {
 }
 
 /* ================== Community ================== */
-.community-card { 
-    background: #1f2937; 
-    border-radius: 12px; 
-    padding: 14px; 
+.community-card {
+    background: #1f2937;
+    border-radius: 12px;
+    padding: 14px;
 }
-.community-title { 
-    font-weight: 600; 
-    margin-bottom: 10px; 
-    color: #e9ecf1; 
+.community-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #e9ecf1;
 }
-.author-row { 
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
+.author-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-.author-avatar { 
-    width: 34px; 
-    height: 34px; 
-    border-radius: 50%; 
-    object-fit: cover; 
-    border: 1px solid #2b3644; 
+.author-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #2b3644;
 }
-.author-name { 
-    font-size: .9rem; 
-    font-weight: 600; 
-    line-height: 1; 
-    color: #dfe7ef; 
+.author-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1;
+    color: #dfe7ef;
 }
-.author-meta { 
-    font-size: .75rem; 
-    color: #9fb2c3; 
-    line-height: 1; 
+.author-meta {
+    font-size: 0.75rem;
+    color: #9fb2c3;
+    line-height: 1;
 }
-.post-actions { 
-    margin-left: auto; 
-    display: flex; 
-    align-items: center; 
-    gap: 6px; 
-    color: #9fb2c3; 
+.post-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #9fb2c3;
 }
-.post-actions i { 
-    font-size: 1.05rem; 
+.post-actions i {
+    font-size: 1.05rem;
 }
 
 /* ================== Footer ================== */
-.footer { 
-    background: #111827; 
-    padding: 20px; 
-    text-align: center; 
-    margin-top: 30px; 
+.footer {
+    background: #111827;
+    padding: 20px;
+    text-align: center;
+    margin-top: 30px;
 }
