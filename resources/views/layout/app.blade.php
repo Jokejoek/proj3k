@@ -28,9 +28,6 @@
       </button>
       <div id="mainNav" class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="#">Tools</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Vulnerability</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Community</a></li>
           <li class="nav-item"><a class="nav-link active" href="{{ url('/admin/backoffice') }}">Back Office</a></li>
         </ul>
         @auth('admin')

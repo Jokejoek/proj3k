@@ -17,9 +17,9 @@
       <div class="card p-3">
         <h6>Users</h6>
         <h3 class="mb-2">{{ $stats['users'] }}</h3>
-        @can('users.manage')
-          <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-primary">Manage Users</a>
-        @endcan
+        <!--@can('users.manage')
+          <a href="{{ route('admin.backend.users') }}" class="btn btn-sm btn-primary">Manage Users</a>
+        @endcan-->
       </div>
     </div>
 
@@ -27,9 +27,9 @@
       <div class="card p-3">
         <h6>CVE</h6>
         <h3 class="mb-2">{{ $stats['cves'] }}</h3>
-        @can('content.manage')
-          <a href="{{ route('cve.create') }}" class="btn btn-sm btn-warning">New CVE</a>
-        @endcan
+        <!--@can('content.manage')
+          <a href="{{ route('admin.backend.cve.create') }}" class="btn btn-sm btn-warning">New CVE</a>
+        @endcan-->
       </div>
     </div>
 
@@ -37,9 +37,6 @@
       <div class="card p-3">
         <h6>Tools</h6>
         <h3 class="mb-2">{{ $stats['tools'] }}</h3>
-        @can('content.manage')
-          <a href="{{ route('tools.create') }}" class="btn btn-sm btn-warning">New Tool</a>
-        @endcan
       </div>
     </div>
 

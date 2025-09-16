@@ -39,18 +39,15 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id', 'role_id');
     }
 
-    public function isSuperAdmin(): bool
-    {
-        return optional($this->role)->name === 'super_admin';
-    }
-
-    public function isContentAdmin(): bool
-    {
-        return optional($this->role)->name === 'content_admin';
-    }
-
     public function isAdmin(): bool
     {
-        return $this->isSuperAdmin() || $this->isContentAdmin();
+        // ผ่านถ้า role_id = 1 หรือชื่อ role = 'admin'
+        return (int)($this->role_id ?? 0) === 1
+            || in_array(optional($this->role)->name, ['admin'], true);
+    }
+
+    public function scopeUser($q)
+    {
+        return $q->where('role_id', 2);
     }
 }

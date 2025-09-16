@@ -96,9 +96,12 @@
     <div class="col-md-6 mb-3">
       {{-- เพิ่ม position-relative ตรงนี้ --}}
       <article class="card cve-card position-relative h-100 shadow-sm">
-        <img src="https://picsum.photos/seed/{{ $c->cve_id }}/600/250"
-             class="card-img-top" alt="{{ $c->cve_id }}"
-             style="object-fit:cover; max-height:200px;">
+        <img
+          src="{{ $c->image_url ?? 'https://picsum.photos/seed/'.urlencode($c->cve_id).'/1200/675' }}"
+          class="card-img-top"
+          alt="{{ $c->cve_id }}"
+          loading="lazy"
+          onerror="this.src='https://picsum.photos/seed/{{ urlencode($c->cve_id) }}/1200/675'">
 
         <div class="card-body d-flex flex-column">
           <h5 class="card-title cve-id mb-1">{{ $c->cve_id }}</h5>

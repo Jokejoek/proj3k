@@ -6,6 +6,7 @@
     <title>Laravel 12 Basic CRUD by devbanban.com 2025</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     @yield('css_before')
+    <link rel="stylesheet" href="{{ asset('css/backend.css') }}">
   </head>
   <body>
 
@@ -26,17 +27,37 @@
 
         <div class="col-md-3">
           <div class="list-group">
-            <a href="/admin/dashboard" class="list-group-item list-group-item-action active" aria-current="true">
+            <a href="{{ route('admin.dashboard') }}"class="list-group-item list-group-item-action active home" aria-current="true">
               Home
             </a>
-          
-            <a href="admin/backoffice/admin" class="list-group-item list-group-item-action"> - Admin </a>
 
-            <a href="admin/backoffice/user" class="list-group-item list-group-item-action"> - User </a>
-            
-            <a href="admin/backoffice/Cve" class="list-group-item list-group-item-action"> - Cve </a>
+              {{-- Admins --}}
+              <a href="{{ route('admin.backend.admins.index') }}"
+                class="list-group-item list-group-item-action
+                        {{ request()->routeIs('admin.backend.admins.*') ? 'active' : '' }}">
+                - Admin
+              </a>
 
-            <a href="admin/backoffice/Tools" class="list-group-item list-group-item-action"> - Tools </a>
+              {{-- Users (หน้า index ผู้ใช้ทั่วไปที่ BackofficeController คืนค่า) --}}
+              <a href="{{ route('admin.backend.users') }}"
+                class="list-group-item list-group-item-action
+                        {{ request()->routeIs('admin.backend.users') ? 'active' : '' }}">
+                - User
+              </a>
+
+              {{-- CVE --}}
+              <a href="{{ route('admin.backend.cve.index') }}"
+                class="list-group-item list-group-item-action
+                        {{ request()->routeIs('admin.backend.cve.*') ? 'active' : '' }}">
+                - CVE
+              </a>
+
+              {{-- Tools --}}
+              <a href="{{ route('admin.backend.tools.index') }}"
+                class="list-group-item list-group-item-action
+                      {{ request()->routeIs('admin.backend.tools.*') ? 'active' : '' }}">
+                - Tools
+              </a>
           
           </div>
           @yield('sidebarMenu')
@@ -50,7 +71,7 @@
     </div>
 
     <footer class="mt-5 mb-2">
-      <p class="text-center">by devbanban.com @2025</p>
+      <div class="container small text-center">ProJ3k Back Office • © {{ date('Y') }}</div>
     </footer>
     
     @yield('footer')
@@ -63,6 +84,6 @@
 
     {{-- >>>>>>> ตรงนี้สำคัญ <<<<<<< --}}
     @include('sweetalert::alert')
-
+    @stack('scripts')
   </body>
 </html>
