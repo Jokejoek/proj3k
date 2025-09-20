@@ -22,8 +22,8 @@ class BackofficeController extends Controller
     {
         // รายการผู้ใช้
         return view('backend.users.index');
+        
     }
-
     public function cveIndex()
     {
         // รายการ CVE

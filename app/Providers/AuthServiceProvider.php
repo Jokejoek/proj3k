@@ -22,18 +22,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // ผ่านทุก ability ถ้า super admin (role_id = 1)
-        Gate::define('access-admin', function ($user) {
-            return (int)($user->role_id ?? 0) === 1 ? true : null;
+
+        $this->registerPolicies();
+
+        Gate::before(function ($u) {
+            return ($u && (int)($u->role_id ?? 0) === 1) ? true : null;
         });
 
-        // ให้ทั้ง super_admin(1) + content_admin(2) เข้าแดชบอร์ด
-        Gate::define('admin.area', fn(User $u) => in_array((int)$u->role_id, [1,2], true));
-
-        // จัดการผู้ใช้: เฉพาะ super_admin
-        Gate::define('users.manage', fn(User $u) => (int)$u->role_id === 1);
-
-        // เขียนคอนเทนต์: super_admin + content_admin
-        Gate::define('content.manage', fn(User $u) => in_array((int)$u->role_id, [1,2], true));
+        Gate::define('is-admin', fn($u) => (int)($u->role_id ?? 0) === 1);
+        Gate::define('is-user',  fn($u) => (int)($u->role_id ?? 0) === 2);
     }
 }

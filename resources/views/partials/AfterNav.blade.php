@@ -15,7 +15,7 @@
         <a href="{{ url('/Tools') }}" class="nav-item nav-link fontLog">Tools</a>
         <a href="{{ url('/Vulnerability') }}" class="nav-item nav-link fontLog">Vulnerability</a>
         <a href="{{ url('/Community') }}" class="nav-item nav-link fontLog">Community</a>
-        <a href="{{ url('/about') }}" class="nav-item nav-link fontLog">About</a>
+        <a href="{{ route('about') }}" class="nav-item nav-link fontLog">About Us</a>
 
         @guest
           {{-- ยังไม่ล็อกอิน --}}
@@ -41,7 +41,7 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
-              <a class="dropdown-item" href="{{ url('/profile') }}">
+              <a class="dropdown-item" href="{{ url('/editprofile') }}">
                 <i class="far fa-user mr-2"></i> Profile
               </a>
               <div class="dropdown-divider"></div>

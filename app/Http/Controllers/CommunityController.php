@@ -18,62 +18,50 @@ class CommunityController extends Controller
         return view('community', compact('posts'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'content'      => ['required', 'string'],
-            'image'        => ['nullable', 'image', 'max:2048'],
-            // ถ้ายังไม่ใช้หมวด/หัวข้อ ให้ปล่อย nullable ไว้ก่อน
-            'category_id'  => ['nullable', 'exists:pj_categories,category_id'],
-            'title'        => ['nullable', 'string', 'max:150'],
-        ]);
+    public function storeComment(Request $request, Post $post)
+{
+    $data = $request->validate([
+        'content' => ['required', 'string', 'max:1000'],
+    ]);
 
-        $imageUrl = null;
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('posts', 'public');
-            $imageUrl = asset('storage/' . $path);
-        }
+    \App\Models\Comment::create([
+        'post_id' => $post->post_id,
+        'user_id' => auth()->id(),
+        'content' => $data['content'],
+    ]);
 
-        Post::create([
-            'user_id'     => auth()->id(),
-            'category_id' => $request->input('category_id'), // อาจเป็น null ได้
-            'title'       => $request->input('title'),       // อาจเป็น null ได้
-            'content'     => $request->content,
-            'image_url'   => $imageUrl,
-        ]);
+    // อัปเดต contribution_score = จำนวนคอมเมนต์ทั้งหมดของ user
+    $me = auth()->user();
+    $me->contribution_score = \App\Models\Comment::where('user_id', $me->user_id)->count();
+    $me->save();
 
-        // กลับไปหน้า community พร้อมข้อความสำเร็จ
-        return redirect()
-            ->route('community.index')
-            ->with('status', 'posted');
-    }
+    return back()->with('status', 'commented');
+}
 
 public function vote(Request $request, Post $post)
 {
     $request->validate(['value' => ['required', 'in:1,-1']]);
 
-    VotePost::updateOrCreate(
+    // โหวตหรือแก้ไขโหวตของผู้ใช้ปัจจุบัน
+    \App\Models\VotePost::updateOrCreate(
         ['post_id' => $post->post_id, 'user_id' => auth()->id()],
         ['value'   => (int) $request->value]
     );
 
-    return redirect()
-        ->route('community.index')   // กลับไปหน้า community
-        ->withFragment('post-'.$post->post_id); // jump ไปยังโพสต์นี้
-}
+    // อัปเดต karma ของเจ้าของโพสต์ (ไม่นับโหวตตนเอง)
+    $owner = $post->user;
+    $ownerKarma = \App\Models\VotePost::whereHas('post', function ($q) use ($owner) {
+                        $q->where('user_id', $owner->user_id);
+                    })
+                    ->where('user_id', '!=', $owner->user_id)
+                    ->sum('value');
 
-    public function storeComment(Request $request, Post $post)
-    {
-        $data = $request->validate([
-            'content' => ['required', 'string', 'max:1000'],
-        ]);
+    $owner->karma = $ownerKarma;
+    $owner->save();
 
-        Comment::create([
-            'post_id' => $post->post_id,
-            'user_id' => auth()->id(),
-            'content' => $data['content'],
-        ]);
-
-        return back()->with('status', 'commented');
+    // ป้องกันเลื่อนขึ้นบนสุด
+    if ($request->ajax()) {
+        return response()->json(['status' => 'ok']);
     }
-}
+    return back()->with('status', 'voted');
+}}

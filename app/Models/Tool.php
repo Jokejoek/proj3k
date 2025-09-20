@@ -11,14 +11,21 @@ class Tool extends Model
     public $incrementing = true;
     protected $keyType = 'int';
     public $timestamps = true;           // มี created_at / updated_at
+    
 
-    protected $fillable = [
+        protected $fillable = [
         'name','category','title','description','image_url',
         'download_link','popularity_score','created_by_user_id',
     ];
     public function views()
     {
         return $this->morphMany(\App\Models\ContentView::class, 'viewable');
+    }
+    protected static function booted()
+    {
+        static::deleting(function ($tool) {
+            $tool->views()->delete();
+        });
     }
 
 }

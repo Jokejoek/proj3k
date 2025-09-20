@@ -24,14 +24,13 @@ class AuthController extends Controller
     public function login(Request $r)
     {
         $data = $r->validate([
-            'login'    => ['required','string'], // username หรือ email
+            'login'    => ['required','string'],
             'password' => ['required','string','min:8'],
         ]);
         $remember = $r->boolean('remember', false);
 
         $field = filter_var($data['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        // 🔐 ใช้ guard('admin')
         if (! Auth::guard('admin')->attempt([$field => $data['login'], 'password' => $data['password']], $remember)) {
             throw ValidationException::withMessages([
                 'login' => 'อีเมล/ยูสเซอร์เนม หรือรหัสผ่านไม่ถูกต้อง',
@@ -40,9 +39,9 @@ class AuthController extends Controller
 
         $r->session()->regenerate();
 
-        // (ถ้าจะตรวจ role เพิ่มเติม)
+        // ✅ เหลือเฉพาะ admin (role_id === 1)
         $user = Auth::guard('admin')->user();
-        if (! in_array((int)$user->role_id, [1,2], true)) {
+        if ((int)($user->role_id ?? 0) !== 1) {
             Auth::guard('admin')->logout();
             $r->session()->invalidate();
             $r->session()->regenerateToken();

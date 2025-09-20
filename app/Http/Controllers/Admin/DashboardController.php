@@ -10,11 +10,24 @@ use App\Models\Tool;
 use App\Models\ContentView;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class DashboardController extends Controller
 {
-    public function index()
+
+    public function __construct()
     {
+        $this->middleware('auth:admin');
+        //$this->middleware('can:is-admin');
+    }
+    public function index()
+    {   
+        /*dd([
+        'Gate::allows'   => Gate::allows('is-admin'),
+        'Gate::forUser'  => Gate::forUser(Auth::user())->allows('is-admin'),
+        'user->can'      => Auth::user()->can('is-admin'),
+        ]);*/
         $since = Carbon::now()->subDays(30);
 
         $stats = [

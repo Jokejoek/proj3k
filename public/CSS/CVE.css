@@ -153,9 +153,11 @@ a {
 }
 #cve .cve-card .card-img-top {
     width: 100%;
-    aspect-ratio: 16 / 9; /* คงสัดส่วนภาพที่หัวการ์ด */
-    object-fit: cover;
-    max-height: 220px; /* fallback */
+    aspect-ratio: 16 / 9;      /* คงสัดส่วนกรอบ */
+    object-fit: contain;        /* <<< เห็นเต็มรูป */
+    background: var(--surface); /* เติมพื้นหลังให้กลมกลืน */
+    display: block;
+    /* ลบ max-height ออก เพื่อไม่ให้ความสูงโดนบีบ */
     border-bottom: 1px solid var(--border);
 }
 #cve .cve-card .card-body {

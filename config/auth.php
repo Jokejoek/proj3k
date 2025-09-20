@@ -9,21 +9,15 @@ return [
 
     // ✅ วาง admin guard ไว้ใน array 'guards'
     'guards' => [
-        'web' => [
-            'driver'   => 'session',
-            'provider' => 'users',
-        ],
-        'admin' => [
-            'driver'   => 'session',
-            'provider' => 'users', // ใช้ provider เดียวกับผู้ใช้ทั่วไป (หรือเปลี่ยนเป็น 'admins' ถ้ามีโมเดลแยก)
-        ],
+        'web'   => ['driver' => 'session', 'provider' => 'users'],
+        'admin' => ['driver' => 'session', 'provider' => 'users'],
     ],
 
     // ✅ provider ที่ถูกเรียกใช้
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model'  => App\Models\SignupUser::class, // ให้แน่ใจว่า extends Authenticatable
+    'users' => [
+        'driver' => 'eloquent',
+        'model'  => App\Models\User::class, // ให้แน่ใจว่า extends Authenticatable
         ],
 
         // ถ้ามีตาราง/โมเดล admin แยก ค่อยเพิ่ม:
