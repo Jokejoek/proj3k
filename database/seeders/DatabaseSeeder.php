@@ -19,5 +19,15 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        
+        // ✅ เรียก seeder ที่ใส่โพสต์/คอมเมนต์/โหวต
+        $this->call([
+            DemoCommunitySeeder::class,
+        ]);
     }
+
+
+    
 }
+
