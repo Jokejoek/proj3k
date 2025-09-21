@@ -8,9 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginAuthController extends Controller
 {
+    public function __construct()
+    {
+        // ผู้ที่ยังไม่ล็อกอิน (ฝั่ง user) ถึงจะเห็นหน้า login
+        $this->middleware('guest:web')->only(['showLoginForm','login']);
+        // ต้องล็อกอิน (ฝั่ง user) ถึงจะออกจากระบบได้
+        $this->middleware('auth:web')->only(['logout']);
+    }
+
     public function showLoginForm()
     {
-        return view('User.Login');
+        return view('User.Login'); // view ฝั่ง user
     }
 
     public function login(Request $r)
@@ -20,33 +28,33 @@ class LoginAuthController extends Controller
             'password' => 'required|string|min:8',
         ]);
 
-        $remember = (bool) $r->boolean('remember');
-        $login = $r->input('login');
+        $remember = $r->boolean('remember');
+        $login    = $r->input('login');
+        $field    = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        // เดาว่าเป็นอีเมลหรือยูสเซอร์เนม
-        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
-        // เพิ่มเงื่อนไข is_active = 1
+        // เงื่อนไข is_active = 1
         $creds = [
             $field     => $login,
             'password' => $r->password,
             'is_active'=> 1,
         ];
 
-        if (Auth::attempt($creds, $remember)) {
+        if (Auth::guard('web')->attempt($creds, $remember)) {
             $r->session()->regenerate();
-            return redirect()->intended('/')->with('success', 'ยินดีต้อนรับกลับมา!');
+            return redirect()->intended(route('home'))
+                   ->with('success', 'ยินดีต้อนรับกลับมา!');
         }
 
-        return back()->withInput($r->only('login', 'remember'))
-                     ->with('error', 'ข้อมูลเข้าสู่ระบบไม่ถูกต้อง หรือบัญชีถูกระงับ');
+        return back()
+            ->withInput($r->only('login','remember'))
+            ->with('error', 'ข้อมูลเข้าสู่ระบบไม่ถูกต้อง หรือบัญชีถูกระงับ');
     }
 
     public function logout(Request $r)
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
         $r->session()->invalidate();
         $r->session()->regenerateToken();
-        return redirect('/')->with('success', 'ออกจากระบบแล้ว');
+        return redirect()->route('home')->with('success', 'ออกจากระบบแล้ว');
     }
 }

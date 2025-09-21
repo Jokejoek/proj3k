@@ -5,12 +5,14 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
 // User Controllers
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\EditProfileController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\ToolController;
 use App\Http\Controllers\CveController;
 use App\Http\Controllers\User\SignupAuthController;
 use App\Http\Controllers\User\LoginAuthController;
+use App\Http\Controllers\VoteCommentController;
 
 // Admin Controllers
 use App\Http\Controllers\Admin\AuthController;
@@ -33,16 +35,7 @@ use App\Models\Cve;
 */
 
 // หน้าแรก (main.blade)
-Route::get('/', function () {
-    $toolsChart = DB::table('pj_tools')
-        ->select('name', 'popularity_score')
-        ->orderByDesc('popularity_score')
-        ->get();
-
-    $recentCves = Cve::recent(8)->get();
-
-    return view('main', compact('toolsChart', 'recentCves'));
-})->name('home');
+Route::get('/', [MainController::class, 'index'])->name('home');
 
 /* ---------- Auth (User) ---------- */
 Route::get('/signup', [SignupAuthController::class, 'showSignupForm'])->name('signup.form');
@@ -67,30 +60,27 @@ Route::get('/Community', [CommunityController::class, 'index'])->name('community
 Route::redirect('/community', '/Community', 301);
 
 // ต้องล็อกอินก่อน ถึงจะโพสต์/โหวต/คอมเมนต์ได้
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:web')->group(function () {
     Route::post('/posts', [CommunityController::class, 'store'])->name('posts.store');
     Route::post('/posts/{post}/vote', [CommunityController::class, 'vote'])->name('posts.vote');
     Route::post('/posts/{post}/comments', [CommunityController::class, 'storeComment'])->name('posts.comments.store');
+    Route::get('/posts/{post}', [CommunityController::class, 'show'])->name('posts.show');
 });
 
 /* ---------- About ---------- */
 Route::view('/about', 'about')->name('about');
 
 /* ---------- Profile (ต้องล็อกอิน) ---------- */
-Route::middleware('auth')->group(function () {
-    // หน้า profile ดูอย่างเดียว
-    Route::get('/profile', function () {
-        return view('profile', ['user' => Auth::user()]);
-    })->name('profile');
-
-    // หน้าแก้ไขโปรไฟล์ + อัปเดต 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:web')->group(function () {
+    Route::get('/profile', fn() => view('profile', ['user' => Auth::guard('web')->user()]))->name('profile');
     Route::get('/editprofile', [EditProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/editprofile', [EditProfileController::class, 'update'])->name('profile.update');
 });
 
+Route::middleware('auth:web')->group(function () {
+    Route::post('/comments/{comment}/reply', [VoteCommentController::class, 'reply'])->name('comments.reply');
+    Route::post('/comments/{comment}/vote',  [VoteCommentController::class, 'vote'])->name('comments.vote');
 });
-
 /*
 |--------------------------------------------------------------------------
 | Admin

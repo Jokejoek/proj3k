@@ -23,6 +23,10 @@
           <thead>
             <tr class="table-info">
               <th class="text-center" style="width:5%">No.</th>
+
+              {{-- เพิ่มคอลัมน์รูป --}}
+              <th class="text-center" style="width:8%">รูป</th>
+
               <th style="width:20%">Username</th>
               <th style="width:25%">Email</th>
               <th style="width:15%">Role</th>
@@ -35,10 +39,28 @@
           @forelse ($UserList as $row)
             @php
               $roleName = optional($row->role)->name ?? 'user';
-              
+
+              // คำนวณ URL ของรูป
+              // - ถ้าเป็น http/https ใช้ตรง ๆ
+              // - ถ้าเป็น path ใน storage ใช้ Storage::url()
+              // - ถ้าไม่มี ให้ใช้ placeholder
+              $avatar = $row->avatar_url
+                  ? (preg_match('/^https?:\/\//', $row->avatar_url)
+                      ? $row->avatar_url
+                      : Storage::url($row->avatar_url))
+                  : asset('images/avatar-placeholder.png');
             @endphp
             <tr>
               <td class="text-center">{{ $UserList->firstItem() + $loop->index }}.</td>
+
+              {{-- ช่องรูป --}}
+              <td class="text-center">
+                <img src="{{ $avatar }}"
+                    alt="avatar"
+                    class="rounded-circle"
+                    style="width:40px;height:40px;object-fit:cover;box-shadow:0 0 0 1px rgba(255,255,255,.2);" />
+              </td>
+
               <td>{{ $row->username }}</td>
               <td>{{ $row->email }}</td>
               <td><span>{{ $roleName }}</span></td>
@@ -56,18 +78,19 @@
                       action="{{ route('admin.backend.users.remove', $row->user_id) }}"
                       method="POST" class="d-none">
                   @csrf
-                  @method('DELETE') {{-- ใช้ตัวใหญ่ --}}
+                  @method('DELETE')
                 </form>
               </td>
             </tr>
           @empty
             <tr>
-              <td colspan="7" class="text-center text-muted py-4">ไม่มีผู้ใช้</td>
+              <td colspan="8" class="text-center text-muted py-4">ไม่มีผู้ใช้</td>
             </tr>
           @endforelse
           </tbody>
         </table>
       </div>
+
 
       <div>{{ $UserList->links() }}</div>
 

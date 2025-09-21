@@ -33,20 +33,26 @@ class CommunityController extends Controller
             'image'   => ['nullable','image','max:2048'],
         ]);
 
-        $imageUrl = null;
+        $path = null;
         if ($request->hasFile('image')) {
+            // เก็บไฟล์ไว้ storage/app/public/posts/...
             $path = $request->file('image')->store('posts', 'public');
-            $imageUrl = asset('storage/'.$path);
         }
 
         Post::create([
             'user_id'   => Auth::id(),
             'title'     => $data['title'],
             'content'   => $data['content'],
-            'image_url' => $imageUrl,
+            'image_url' => $path, // << เก็บเฉพาะ path เช่น "posts/xxx.jpg"
         ]);
 
         return back()->with('success', 'โพสต์เรียบร้อยแล้ว!');
+    }
+
+    public function show(Post $post)
+    {
+        $post->load(['user', 'comments.user', 'comments.replies.user']);
+        return view('Showcommunity', compact('post'));
     }
 
     /**
@@ -55,51 +61,61 @@ class CommunityController extends Controller
     public function storeComment(Request $request, Post $post)
     {
         $data = $request->validate([
-            'content' => ['required', 'string', 'max:1000'],
+            'content'    => ['required', 'string', 'max:1000'],
+            'parent_id'  => ['nullable', 'integer', 'exists:pj_comments,comment_id'],
         ]);
 
         Comment::create([
-            'post_id' => $post->post_id,
-            'user_id' => Auth::id(),
-            'content' => $data['content'],
+            'post_id'   => $post->post_id,
+            'user_id'   => Auth::id(),
+            'content'   => $data['content'],
+            'parent_id' => $data['parent_id'] ?? null,
         ]);
 
-        // อัปเดต contribution_score = จำนวนคอมเมนต์ทั้งหมดของ user
-        $me = Auth::user();
-        $me->contribution_score = Comment::where('user_id', $me->user_id)->count();
-        $me->save();
+        // อัปเดตตัวนับ (ตามที่คุณเลือกว่าจะนับบนสุดหรือทั้งหมด)
+        $post->comment_count = Comment::where('post_id', $post->post_id)->count();
+        $post->save();
 
-        return back()->with('status', 'commented');
+        return back();
     }
+
 
     /**
      * โหวตโพสต์ + อัปเดต karma ของเจ้าของโพสต์ (ไม่รวมโหวตตัวเอง)
      */
     public function vote(Request $request, Post $post)
     {
-        $request->validate(['value' => ['required', 'in:1,-1']]);
+        $data = $request->validate(['value' => 'required|in:1,-1']);
+        $userId = auth()->id();
 
-        // โหวตหรือแก้ไขโหวตของผู้ใช้ปัจจุบัน
-        VotePost::updateOrCreate(
-            ['post_id' => $post->post_id, 'user_id' => Auth::id()],
-            ['value'   => (int) $request->value]
-        );
+        // upsert โหวตของผู้ใช้
+        $existing = $post->votes()->where('user_id', $userId)->first();
+        $val = (int)$data['value'];
 
-        // อัปเดต karma ของเจ้าของโพสต์ (ไม่นับโหวตตนเอง)
-        $owner = $post->user;
-        $ownerKarma = VotePost::whereHas('post', function ($q) use ($owner) {
-                                $q->where('user_id', $owner->user_id);
-                           })
-                           ->where('user_id', '!=', $owner->user_id)
-                           ->sum('value');
-
-        $owner->karma = $ownerKarma;
-        $owner->save();
-
-        // ถ้าเรียกแบบ AJAX ก็ส่ง JSON กลับ (กันหน้าเด้งขึ้นบน)
-        if ($request->ajax()) {
-            return response()->json(['status' => 'ok']);
+        if ($existing) {
+            if ($existing->value === $val) {
+                $existing->delete();                // กดซ้ำ = ยกเลิก
+            } else {
+                $existing->update(['value' => $val]); // เปลี่ยนค่า
+            }
+        } else {
+            $post->votes()->create(['user_id' => $userId, 'value' => $val]);
         }
-        return back()->with('status', 'voted');
+
+        // รวมผลจากตารางโหวต
+        $up   = $post->votes()->where('value', 1)->count();
+        $down = $post->votes()->where('value', -1)->count();
+        $score = $up - $down;
+
+        // เขียนกลับ pj_posts (ใช้ forceFill เพื่อกันปัญหา fillable)
+        $post->forceFill([
+            'upvotes'   => $up,
+            'downvotes' => $down,
+            'score'     => $score,
+            // 'comment_count' => Comment::where('post_id',$post->post_id)->count(),
+        ])->save();
+
+        return back();
     }
+
 }

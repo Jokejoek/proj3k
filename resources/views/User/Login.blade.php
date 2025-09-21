@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{ asset('css/main.css') }}">
   <!-- ใช้ CSS Signup เดียวกัน -->
   <link rel="stylesheet" href="{{ asset('css/Users/Signup.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/Tools.css') }}">
 </head>
 <body>
 
@@ -36,12 +37,13 @@
           <a href="{{ url('/Community') }}" class="nav-item nav-link fontLog">Community</a>
           <a href="{{ url('/about') }}" class="nav-item nav-link fontLog">About</a>
 
-          @guest
-            {{-- ยังไม่ล็อกอิน --}}
-            <a href="{{ url('/login') }}" class="nav-item nav-link fontLog">Login</a>
-            <a href="{{ url('/signup') }}" class="nav-item nav-link btn-auth ml-2">Sign up</a>
+          @guest('web')
+            {{-- ยังไม่ล็อกอินฝั่งผู้ใช้ --}}
+            <a href="{{ route('login.form') }}" class="nav-item nav-link fontLog">Login</a>
+            <a href="{{ route('signup.form') }}" class="nav-item nav-link btn-auth ml-2">Sign up</a>
           @else
-            {{-- ล็อกอินแล้ว --}}
+            {{-- ล็อกอินฝั่งผู้ใช้แล้ว --}}
+            @php $u = Auth::guard('web')->user(); @endphp
             <div class="nav-item dropdown ml-3">
               <a class="nav-link d-flex align-items-center dropdown-toggle p-0"
                  href="#" id="userMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

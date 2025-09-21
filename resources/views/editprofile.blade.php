@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/Tools.css') }}">
   <style>
     .avatar-lg{width:180px;height:180px;border-radius:50%;object-fit:cover;border:4px solid #2b3644;}
     .btn-soft{background:#2d3748;color:#fff;border-radius:8px;padding:6px 14px;cursor:pointer;}
@@ -35,9 +36,18 @@
 
         {{-- Left: Avatar --}}
         <div class="col-md-5 d-flex flex-column align-items-center mb-4 mb-md-0">
+          @php
+              $avatar = $user->avatar_url
+                  ? (\Illuminate\Support\Str::startsWith($user->avatar_url, ['http://','https://'])
+                      ? $user->avatar_url
+                      : asset($user->avatar_url))   // กรณีเก็บเป็น "storage/avatars/xxx.jpg"
+                  : 'https://ui-avatars.com/api/?size=256&name='.urlencode($user->username ?? $user->email);
+          @endphp
+
           <img id="avatarPreview"
-               src="{{ $user->avatar_url ?: 'https://ui-avatars.com/api/?size=256&name='.urlencode($user->username ?? $user->email) }}"
-               class="avatar-lg mb-3" alt="avatar">
+              src="{{ $avatar }}?v={{ $user->updated_at->timestamp ?? time() }}"
+              class="avatar-lg mb-3" alt="avatar">
+
 
           <label class="btn btn-soft">
             <i class="fa-regular fa-image mr-2"></i> Change Picture
@@ -88,5 +98,23 @@
   {{-- จำเป็นสำหรับ dropdown/toggler ของ Bootstrap 4 --}}
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  (function () {
+    const input = document.getElementById('avatarInput');
+    const preview = document.getElementById('avatarPreview');
+    let url = null;
+
+    if (input && preview) {
+      input.addEventListener('change', function () {
+        const file = this.files && this.files[0] ? this.files[0] : null;
+        if (url) { URL.revokeObjectURL(url); url = null; }
+        if (!file || !file.type.startsWith('image/')) return;
+
+        url = URL.createObjectURL(file);
+        preview.src = url; // แสดงรูปที่เลือกทันที
+      });
+    }
+  })();
+</script>
 </body>
 </html>

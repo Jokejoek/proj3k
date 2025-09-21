@@ -50,4 +50,35 @@ class User extends Authenticatable
     {
         return $q->where('role_id', 2);
     }
+
+    public function getAvatarUrlAttribute($value): string
+    {
+        // 1) เป็น URL เต็มอยู่แล้ว
+        if (!empty($value) && preg_match('~^https?://~i', $value)) {
+            return $value;
+        }
+
+        if (!empty($value)) {
+            // normalize path
+            $path = ltrim($value, '/');
+
+            // 2) เก็บแบบ 'storage/avatars/xxx.jpg' -> ใช้ asset ตรงๆ
+            if (str_starts_with($path, 'storage/')) {
+                return asset($path);
+            }
+
+            // 3) เก็บแบบ 'public/avatars/xxx.jpg' (ไฟล์บน disk 'public')
+            if (str_starts_with($path, 'public/')) {
+                // public/... -> /storage/...
+                return asset('storage/' . substr($path, 7));
+            }
+
+            // 4) เก็บแบบ 'avatars/xxx.jpg' -> ชี้ผ่าน /storage/avatars/...
+            return asset('storage/' . $path);
+        }
+
+        // 5) ไม่ได้ตั้งค่า -> fallback ตาม username
+        $seed = $this->username ?? 'guest';
+        return 'https://i.pravatar.cc/64?u=' . urlencode($seed);
+    }
 }

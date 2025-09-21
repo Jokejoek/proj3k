@@ -15,7 +15,21 @@ main{ flex: 1; }
 .navbar a {
     color: #ffffff;
     margin-right: 15px;
+} 
+/* ================== Navbar Brand ================== */
+.navbar-brand {
+  text-decoration: none !important;   /* ตัดเส้นใต้ */
+  color: #ffffff !important;          /* สีเริ่มต้นเป็นขาว */
+  font-weight: 700;
+  transition: color 0.2s ease;        /* ทำให้เปลี่ยนสีลื่น */
 }
+
+.navbar-brand:hover,
+.navbar-brand:focus {
+  color: #8ae000 !important;          /* hover = เขียว */
+  text-decoration: none !important;
+}
+
 
 /* font Login */
 .fontLog {
@@ -427,3 +441,10 @@ body.about-nosroll {
     width: min(1060px, 94vw);
     margin: 0 auto;
 }
+/* ระยะห่างภายในการ์ดและ hover */
+.community-card { padding: 14px; transition: transform .15s, box-shadow .15s; }
+.community-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+
+/* แถวล่างจัดแนวกลางสวยขึ้น */
+.author-row { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:10px; }
+.author-avatar { width:32px; height:32px; border-radius:50%; object-fit:cover; }

@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{ asset('css/main.css') }}">
   <!-- หน้า Signup (ถ้าต้องการสไตล์เฉพาะหน้านี้ ค่อยใส่เพิ่มในไฟล์นี้) -->
   <link rel="stylesheet" href="{{ asset('css/Users/Signup.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/Tools.css') }}">
 </head>
 <body>
 

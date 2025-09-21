@@ -1,0 +1,135 @@
+/* ====== โทนสีหลัก (เหมือน Showcommunity) ====== */
+:root{
+  --bg-dark: #0f1823;          /* พื้นหลังเพจ (เข้ากับ main.css เดิม) */
+  --card: #e9e5ff;             /* ม่วงอ่อนของการ์ด */
+  --card-2: #edeaff;           /* ม่วงอ่อนอีกเฉด */
+  --card-border: #c9c2ff;      /* เส้นขอบการ์ด */
+  --ink: #1b1f2a;              /* สีตัวอักษรบนการ์ดอ่อน */
+  --muted: #697080;            /* ตัวอักษรจาง */
+  --lime: #7CFC00;             /* ปุ่ม/แอคเซนต์ */
+  --ring: rgba(123, 97, 255, .25);
+}
+
+/* พื้นหลังรวม */
+body { background: var(--bg-dark); }
+
+/* ====== กล่องเขียนโพสต์ ====== */
+.composer-wrap{
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 18px rgba(20,16,60,.08);
+}
+.composer-input{
+  width: 100%;
+  background: var(--card-2);
+  border: 1px solid var(--card-border);
+  color: var(--ink);
+  border-radius: 12px;
+  padding: 10px 12px;
+  outline: none;
+}
+.composer-input:focus{
+  border-color: #a9a0ff;
+  box-shadow: 0 0 0 4px var(--ring);
+}
+.btn-lime{
+  background: var(--lime);
+  color: #071209;
+  border: 0;
+  padding: 8px 14px;
+  font-weight: 600;
+  border-radius: 10px;
+}
+.btn-lime:hover{ filter: brightness(0.95); }
+.btn-file input[type=file]{ display:none; }
+
+/* preview รูป */
+.composer-preview{
+  background: var(--card-2);
+  border: 1px dashed var(--card-border);
+  border-radius: 12px;
+  padding: 8px;
+}
+
+/* ====== การ์ดโพสต์ ====== */
+.post-card{
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 10px 22px rgba(20,16,60,.10);
+  color: var(--ink);
+}
+.post-card + .post-card{ margin-top: 16px; }
+
+.post-header .post-meta{
+  color: var(--muted);
+  font-size: 13px;
+}
+.post-title{
+  margin: 4px 0 8px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.post-img{
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: var(--card-2);
+}
+
+/* ปุ่ม action ใต้โพสต์ */
+.action-btn{
+  background: var(--card-2) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--card-border) !important;
+  border-radius: 10px;
+}
+.action-btn:hover{
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+/* ====== Modal คอมเมนต์ ====== */
+.modal-content{
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.cmt-head{
+  background: var(--card-2);
+  border-bottom: 1px solid var(--card-border);
+  padding: 12px 16px;
+}
+.cmt-body{ padding: 12px 16px; }
+.cmt-footer{
+  border-top: 1px solid var(--card-border);
+  background: var(--card-2);
+  padding: 10px 12px;
+}
+
+/* ====== รายการคอมเมนต์ย่อย (partial) ถ้ามี ====== */
+.comment-item{
+  background: var(--card-2);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+/* ====== ปรับ pagination ให้เข้าชุด ====== */
+.page-item .page-link{
+  background: var(--card-2);
+  color: var(--ink);
+  border-color: var(--card-border);
+}
+.page-item.active .page-link{
+  background: var(--lime);
+  color: #061006;
+  border-color: transparent;
+}
+
+/* ====== รูป avatar เล็ก ๆ ====== */
+.rounded-circle{ object-fit: cover; }

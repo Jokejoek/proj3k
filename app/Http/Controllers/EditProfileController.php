@@ -42,19 +42,29 @@ class EditProfileController extends Controller
         $user = Auth::user();
 
         $data = $request->validate([
-            'username' => ['required', 'string', 'max:50'],
-            'avatar'   => ['nullable', 'image', 'max:2048'],
+            'username' => ['required','string','max:255'],
+            // 'email'    => ['required','email','max:255'], // เอาออก หรือทำเป็น sometimes
+            'avatar'   => ['nullable','image','max:2048'],
         ]);
 
+        // ถ้ามีการอัปโหลดรูปใหม่
         if ($request->hasFile('avatar')) {
+            // (เลือกทำ) ลบไฟล์เก่าเพื่อลดขยะ
+            if ($user->avatar_url && !str_starts_with($user->avatar_url, 'http')) {
+                // $user->avatar_url เก็บแบบ "storage/avatars/xxx.jpg"
+                $oldPath = str_replace('storage/', '', $user->avatar_url); // => "avatars/xxx.jpg"
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
+            }
+
             $path = $request->file('avatar')->store('avatars', 'public');
-            $user->avatar_url = asset('storage/'.$path);
+            $user->avatar_url = 'storage/'.$path;  // เก็บเป็น storage/avatars/xxx.jpg
         }
 
         $user->username = $data['username'];
+        // ถ้าต้องการให้แก้ email ได้ ค่อยเพิ่ม input และ validate ทีหลัง
         $user->save();
 
-        return back()->with('ok', 'Profile updated');
+        return back()->with('success', 'Profile updated!');
     }
 }
 
